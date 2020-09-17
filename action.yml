@@ -6,13 +6,9 @@ inputs:
   githubToken:
     description: OAuth token with 'public_repo' permission
     required: true
-  include:
-    description: File patterns to validate
+  patterns:
+    description: File patterns to validate - refer to fast-glob patterns
     required: true
-  exclude:
-    description: File patterns to exclude from validation
-    required: false
-    default: []
 
 runs:
   # Using: https://help.github.com/en/actions/automating-your-workflow-with-github-actions/metadata-syntax-for-github-actions#using
