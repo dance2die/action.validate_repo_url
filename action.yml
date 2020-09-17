@@ -1,0 +1,25 @@
+name: Repostiroy URL Validator
+author: dance2die
+description: Report broken URLs in the repository with GitHub issues
+
+inputs:
+  githubToken:
+    description: OAuth token with 'public_repo' permission
+    required: true
+  include:
+    description: File patterns to validate
+    required: true
+  exclude:
+    description: File patterns to exclude from validation
+    required: false
+    default: []
+
+runs:
+  # Using: https://help.github.com/en/actions/automating-your-workflow-with-github-actions/metadata-syntax-for-github-actions#using
+  using: "node12"
+  main: index.js
+
+# Branding: https://help.github.com/en/actions/automating-your-workflow-with-github-actions/metadata-syntax-for-github-actions#branding
+branding:
+  icon: star
+  color: blue
