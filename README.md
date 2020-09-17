@@ -6,6 +6,8 @@ GitHub action to validate URLs in the repository and report unreachable URLs by 
 
 ## Usage
 
+Following action file will run the validation process daily at 15:00
+
 ```yml
 name: Report broken URLs
 
