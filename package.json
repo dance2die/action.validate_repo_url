@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/dance2die/action.validate_repo_url/issues"
   },
-  "homepage": "https://github.com/dance2die/action.validate_repo_url#readme"
+  "homepage": "https://github.com/dance2die/action.validate_repo_url#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.5",
+    "@actions/github": "^4.0.0",
+    "cheerio": "^1.0.0-rc.3",
+    "isomorphic-fetch": "^2.2.1",
+    "promise.allsettled": "^1.0.2",
+    "unescape": "^1.0.1"
+  }
 }
