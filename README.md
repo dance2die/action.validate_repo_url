@@ -28,3 +28,9 @@ jobs:
 ```
 
 ## Configuration
+
+| Name        | Description                                                                       |
+| ----------- | --------------------------------------------------------------------------------- |
+| githubToken | GitHub secret token required to create an issue in current repository             |
+| include     | a list of file patterns to validate (supports files only not directories for now) |
+| exclude     | a list of paths patterns to ignore                                                |
