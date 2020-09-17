@@ -35,7 +35,7 @@ jobs:
         id: URL_validation_job
         uses: dance2die/action.validate_repo_url@master
         with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          githubToken: ${{ secrets.GH_TOKEN }}
           include: ["docs/**/*.md", "blog/**/*.mdx"]
           exclude: ["node_modules", "website/**/*.md"]
 ```
