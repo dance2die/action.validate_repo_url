@@ -1,10 +1,21 @@
-# action.validate_repo_url
+# Repostiroy URL Validator JavaScript action
 
-## What is this?
+A GitHub action to validate URLs in the repository and report unreachable URLs by creating a GitHub issue
 
-GitHub action to validate URLs in the repository and report unreachable URLs by creating a GitHub issue
+## Inputs
 
-## Usage
+| Name        | Description                                                                       |
+| ----------- | --------------------------------------------------------------------------------- |
+| githubToken | GitHub secret token required to create an issue in current repository             |
+| include     | a list of file patterns to validate (supports files only not directories for now) |
+| exclude     | a list of paths patterns to ignore                                                |
+
+## Outputs
+
+None.  
+But it creates a GitHub issue on each run to report broken links (No issue is created if none found.)
+
+## Example usage
 
 Following action file will run the validation process daily at 15:00
 
@@ -29,10 +40,6 @@ jobs:
           exclude: ["node_modules", "website/**/*.md"]
 ```
 
-## Configuration
+## Additional Info
 
-| Name        | Description                                                                       |
-| ----------- | --------------------------------------------------------------------------------- |
-| githubToken | GitHub secret token required to create an issue in current repository             |
-| include     | a list of file patterns to validate (supports files only not directories for now) |
-| exclude     | a list of paths patterns to ignore                                                |
+This README follows the format in tutorial - https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action#creating-a-readme
