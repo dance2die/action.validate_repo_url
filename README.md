@@ -7,7 +7,7 @@ A GitHub action to validate URLs in the repository and report unreachable URLs b
 | Name        | Description                                                                         | Required? | Default |
 | ----------- | ----------------------------------------------------------------------------------- | --------- | ------- |
 | githubToken | GitHub secret token required to create an issue in current repository               | Yes       | N/A     |
-| include     | an array of file patterns to validate (supports files only not directories for now) | Yes       | N/A     |
+| include     | an array of file patterns to validate (supports files only not directories for now) | No        | ["."]   |
 | exclude     | an array of paths patterns to ignore                                                | No        | []      |
 
 ## Outputs
@@ -51,3 +51,7 @@ This is required to create an issue for the current respository
 ## Additional Info
 
 This README follows the format in tutorial - https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action#creating-a-readme
+
+### Future Inputs
+
+1. checkModifiedFilesOnly
