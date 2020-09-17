@@ -1,9 +1,17 @@
-const globby = require("globby");
 const core = require("@actions/core");
+const glob = require("@actions/glob");
 
-// https://repl.it/@dance2die/glob-promise-demo#index.js
+const patterns = ["docs/**/*", "!node_modules", "!package*.json"];
+const globber = await glob.create(patterns.join("\n"));
+const files = await globber.glob();
 
-(async () => {
-  const paths = await globby(["docs/**/*", "!node_modules", "!package*.json"]);
-  core.info(`paths ==> ${JSON.stringify(paths, null, 2)}`);
-})();
+core.info(`files ==> ${JSON.stringify(files, null, 2)}`);
+
+// const globby = require("globby");
+
+// // https://repl.it/@dance2die/glob-promise-demo#index.js
+
+// (async () => {
+//     const paths = await globby(["docs/**/*", "!node_modules", "!package*.json"]);
+//     core.info(`paths ==> ${JSON.stringify(paths, null, 2)}`);
+// })();
