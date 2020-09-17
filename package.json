@@ -1,7 +1,7 @@
 {
   "name": "action.validate_repo_url",
   "version": "0.0.1",
-  "description": "",
+  "description": "A GitHub action to validate URLs in the repository and report unreachable URLs by creating a GitHub issue",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,5 +24,6 @@
     "isomorphic-fetch": "^2.2.1",
     "promise.allsettled": "^1.0.2",
     "unescape": "^1.0.1"
-  }
+  },
+  "devDependencies": {}
 }
