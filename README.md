@@ -36,8 +36,8 @@ jobs:
         uses: dance2die/action.validate_repo_url@master
         with:
           githubToken: ${{ secrets.GH_TOKEN }}
-          include: ["docs/**/*.md", "blog/**/*.mdx"]
-          exclude: ["node_modules", "website/**/*.md"]
+          # fast-glob patterns - https://github.com/mrmlnc/fast-glob#patterns
+          patterns: ["docs/**/*.md", "!node_modules", "!package*.json"]
 ```
 
 ## About GitHub Token
