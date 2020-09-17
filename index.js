@@ -2,7 +2,7 @@ const core = require("@actions/core");
 const glob = require("@actions/glob");
 
 // const patterns = ["docs/**/*", "!node_modules", "!package*.json"];
-const patterns = ["**"];
+const patterns = ["**/*"];
 
 (async function () {
   const globber = await glob.create(patterns.join("\n"));
