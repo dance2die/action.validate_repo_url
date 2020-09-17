@@ -4,11 +4,11 @@ A GitHub action to validate URLs in the repository and report unreachable URLs b
 
 ## Inputs
 
-| Name        | Description                                                                       |
-| ----------- | --------------------------------------------------------------------------------- |
-| githubToken | GitHub secret token required to create an issue in current repository             |
-| include     | a list of file patterns to validate (supports files only not directories for now) |
-| exclude     | a list of paths patterns to ignore                                                |
+| Name        | Description                                                                         | Required? | Default |
+| ----------- | ----------------------------------------------------------------------------------- | --------- | ------- |
+| githubToken | GitHub secret token required to create an issue in current repository               | Yes       | N/A     |
+| include     | an array of file patterns to validate (supports files only not directories for now) | Yes       | N/A     |
+| exclude     | an array of paths patterns to ignore                                                | No        | []      |
 
 ## Outputs
 
@@ -39,6 +39,14 @@ jobs:
           include: ["docs/**/*.md", "blog/**/*.mdx"]
           exclude: ["node_modules", "website/**/*.md"]
 ```
+
+## About GitHub Token
+
+This is required to create an issue for the current respository
+
+### How to generate a token
+
+### How to add the secret
 
 ## Additional Info
 
