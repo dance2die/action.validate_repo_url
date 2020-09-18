@@ -71,5 +71,5 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
 
   const result = await Promise.all(promises);
 
-  core.info(`result ==>`, JSON.stringify(result, null, 2));
+  core.info(`result ==> ${JSON.stringify(result, null, 2)}`);
 })();
