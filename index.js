@@ -37,8 +37,9 @@ const validateUrls = async (urls) => {
   );
 
   const validationResult = await Promise.all(promises);
-  //   console.log({ validationResult });
-  return validationResult.filter((result) => !result.exist);
+  const result = validationResult.filter((result) => !result.exist);
+  console.log({ validationResult, result });
+  return result;
 };
 
 // const isFile = (path) => fs.lstatSync(path).isFile();
