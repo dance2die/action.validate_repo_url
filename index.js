@@ -1,18 +1,9 @@
 const core = require("@actions/core");
 const glob = require("@actions/glob");
+const getUrls = require("get-urls");
 const fs = require("fs").promises;
 
 const patterns = ["docs/**/*", "!node_modules", "!package*.json"];
-// const patterns = ["**"];
-
-// const isFile = (path) => {
-//   const stat = fs.lstatSync(path);
-//   const isFile = stat.isFile();
-
-//   core.info(`File? ${isFile} => '${path}'`);
-
-//   return isFile;
-// };
 
 async function urlExists(url) {
   try {
@@ -23,9 +14,12 @@ async function urlExists(url) {
   }
 }
 
-const extractUrls = (file) => {
-  // read file content as a string
-  // extract urls
+const extractUrls = async (file) => {
+  const text = await fs.readFile(file, "utf-8");
+  const urls = getUrls(text);
+
+  core.info(`extractUrls==>`, { file, urls });
+  return urls;
 };
 
 // const isFile = (path) => fs.lstatSync(path).isFile();
@@ -38,7 +32,7 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
   const result = files.reduce(async (acc, file) => {
     if (isDirectory(file)) return acc;
 
-    const urls = extractUrls(file) ?? [];
+    const urls = (await extractUrls(file)) ?? [];
     if (urls.length <= 0) return acc;
 
     const invalidUrls = validateUrls(urls) ?? [];
@@ -47,4 +41,6 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
     acc.push({ file, invalidUrls });
     return acc;
   }, {});
+
+  core.info(`result ==>`, { result });
 })();
