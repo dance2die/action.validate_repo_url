@@ -2,7 +2,7 @@ const fs = require("fs");
 const core = require("@actions/core");
 const glob = require("@actions/glob");
 // const getUrls = require("get-urls");
-const markdownLinkExtractor = require("markdown-link-extractor");
+// const markdownLinkExtractor = require("markdown-link-extractor");
 
 const patterns = ["docs/**/*", "!node_modules", "!package*.json"];
 

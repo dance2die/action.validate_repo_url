@@ -23,7 +23,6 @@
     "@actions/glob": "^0.1.0",
     "get-hrefs": "^4.0.0",
     "get-urls": "^10.0.0",
-    "markdown-link-extractor": "^1.2.6",
     "marked": "^1.1.1"
   },
   "devDependencies": {}
