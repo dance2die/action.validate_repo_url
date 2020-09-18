@@ -33,6 +33,7 @@ const validateUrls = async (urls) => {
   );
 
   const validationResult = await Promise.all(promises);
+  console.log({ validationResult });
   return validationResult.filter((result) => !result.exist);
 };
 
