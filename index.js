@@ -5,21 +5,20 @@ const fs = require("fs").promises;
 const patterns = ["docs/**/*", "!node_modules", "!package*.json"];
 // const patterns = ["**"];
 
-const isFile = async (path) => {
-  const stat = await fs.lstat(path);
-  const isFile = await stat.isFile();
+// const isFile = (path) => {
+//   const stat = fs.lstatSync(path);
+//   const isFile = stat.isFile();
 
-  core.info(`File? ${isFile} => '${path}'`);
+//   core.info(`File? ${isFile} => '${path}'`);
 
-  return isFile;
-};
+//   return isFile;
+// };
 
-(async function () {
-  const globber = await glob.create(patterns.join("\n"));
-  // exclude directories
-  const files = (await globber.glob()).filter(
-    async (path) => await isFile(path)
-  );
+const isFile = (path) =>
+  fs.lstatSync(path).isFile()(async function () {
+    const globber = await glob.create(patterns.join("\n"));
+    // exclude directories
+    const files = (await globber.glob()).filter(isFile);
 
-  core.info(`files ==> ${JSON.stringify(files, null, 2)}`);
-})();
+    core.info(`files ==> ${JSON.stringify(files, null, 2)}`);
+  })();
