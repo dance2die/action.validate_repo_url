@@ -18,7 +18,8 @@ const isFile = (path) => fs.lstatSync(path).isFile();
 (async function () {
   const globber = await glob.create(patterns.join("\n"));
   // exclude directories
-  const files = (await globber.glob()).filter(isFile);
+  const paths = await globber.glob();
+  const files = paths.filter(isFile);
 
   core.info(`files ==> ${JSON.stringify(files, null, 2)}`);
 })();
