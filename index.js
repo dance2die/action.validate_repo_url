@@ -14,11 +14,11 @@ const patterns = ["docs/**/*", "!node_modules", "!package*.json"];
 //   return isFile;
 // };
 
-const isFile = (path) =>
-  fs.lstatSync(path).isFile()(async function () {
-    const globber = await glob.create(patterns.join("\n"));
-    // exclude directories
-    const files = (await globber.glob()).filter(isFile);
+const isFile = (path) => fs.lstatSync(path).isFile();
+(async function () {
+  const globber = await glob.create(patterns.join("\n"));
+  // exclude directories
+  const files = (await globber.glob()).filter(isFile);
 
-    core.info(`files ==> ${JSON.stringify(files, null, 2)}`);
-  })();
+  core.info(`files ==> ${JSON.stringify(files, null, 2)}`);
+})();
