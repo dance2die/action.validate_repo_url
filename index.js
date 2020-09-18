@@ -22,7 +22,7 @@ const extractUrls = async (file) => {
   const html = marked(markdown);
   const urls = [...new Set(getHrefs(html))];
 
-  core.info(`extractUrls==> ${file}, ${JSON.stringify(urls, null, 2)}`);
+  //   core.info(`extractUrls==> ${file}, ${JSON.stringify(urls, null, 2)}`);
   return urls;
 };
 
@@ -42,19 +42,34 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
   const globber = await glob.create(patterns.join("\n"));
   const files = await globber.glob();
 
-  const result = files.reduce(async (promisedAcc, file) => {
-    const acc = await promisedAcc;
-    if (isDirectory(file)) return acc;
+  //   const result = files.reduce(async (promisedAcc, file) => {
+  //     const acc = await promisedAcc;
+  //     if (isDirectory(file)) return acc;
+
+  //     const urls = (await extractUrls(file)) || [];
+  //     if (urls.length <= 0) return acc;
+
+  //     const invalidUrls = (await validateUrls(urls)) || [];
+  //     if (invalidUrls.length <= 0) return acc;
+
+  //     acc[file] = invalidUrls;
+  //     return acc;
+  //   }, {});
+
+  const promises = files.map(async (file) => {
+    const emptyResult = { file, invalidUrls: [] };
+    if (isDirectory(file)) return emptyResult;
 
     const urls = (await extractUrls(file)) || [];
-    if (urls.length <= 0) return acc;
+    if (urls.length <= 0) return emptyResult;
 
     const invalidUrls = (await validateUrls(urls)) || [];
-    if (invalidUrls.length <= 0) return acc;
+    if (invalidUrls.length <= 0) return emptyResult;
 
-    acc[file] = invalidUrls;
-    return acc;
-  }, {});
+    return { file, invalidUrls };
+  });
+
+  const result = await Promise.all(promises);
 
   core.info(`result ==>`, JSON.stringify(result, null, 2));
 })();
