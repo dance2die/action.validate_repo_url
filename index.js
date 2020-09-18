@@ -1,7 +1,7 @@
 const core = require("@actions/core");
 const glob = require("@actions/glob");
 const getUrls = require("get-urls");
-const fs = require("fs").promises;
+const fs = require("fs");
 
 const patterns = ["docs/**/*", "!node_modules", "!package*.json"];
 
@@ -15,7 +15,7 @@ async function urlExists(url) {
 }
 
 const extractUrls = async (file) => {
-  const text = await fs.readFile(file, "utf-8");
+  const text = await fs.readFileSync(file, "utf-8");
   const urls = getUrls(text);
 
   core.info(`extractUrls==>`, { file, urls });
