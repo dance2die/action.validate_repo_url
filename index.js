@@ -14,12 +14,37 @@ const patterns = ["docs/**/*", "!node_modules", "!package*.json"];
 //   return isFile;
 // };
 
-const isFile = (path) => fs.lstatSync(path).isFile();
+async function urlExists(url) {
+  try {
+    const response = await fetch(url, { method: "HEAD" });
+    return /4\d\d/.test(response.status) === false;
+  } catch (error) {
+    return false;
+  }
+}
+
+const extractUrls = (file) => {
+  // read file content as a string
+  // extract urls
+};
+
+// const isFile = (path) => fs.lstatSync(path).isFile();
+const isDirectory = (path) => fs.lstatSync(path).isDirectory();
+
 (async function () {
   const globber = await glob.create(patterns.join("\n"));
-  // exclude directories
-  const paths = await globber.glob();
-  const files = paths.filter(isFile);
+  const files = await globber.glob();
 
-  core.info(`files ==> ${JSON.stringify(files, null, 2)}`);
+  const result = files.reduce(async (acc, file) => {
+    if (isDirectory(file)) return acc;
+
+    const urls = extractUrls(file) ?? [];
+    if (urls.length <= 0) return acc;
+
+    const invalidUrls = validateUrls(urls) ?? [];
+    if (invalidUrls.length <= 0) return acc;
+
+    acc.push({ file, invalidUrls });
+    return acc;
+  }, {});
 })();
