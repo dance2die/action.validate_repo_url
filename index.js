@@ -3,6 +3,7 @@ const core = require("@actions/core");
 const glob = require("@actions/glob");
 const marked = require("marked");
 const getHrefs = require("get-hrefs");
+const fetch = require("isomorphic-unfetch");
 
 const patterns = ["docs/**/*", "!node_modules", "!package*.json"];
 
