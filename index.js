@@ -63,14 +63,13 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
   //   }, {});
 
   const promises = files.map(async (file) => {
-    const emptyResult = { file, invalidUrls: [] };
-    if (isDirectory(file)) return emptyResult;
+    if (isDirectory(file)) return null;
 
     const urls = (await extractUrls(file)) || [];
-    if (urls.length <= 0) return emptyResult;
+    if (urls.length <= 0) return null;
 
     const invalidUrls = (await validateUrls(urls)) || [];
-    if (invalidUrls.length <= 0) return emptyResult;
+    if (invalidUrls.length <= 0) return null;
 
     return { file, invalidUrls };
   });
@@ -78,8 +77,6 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
   const resolved = await Promise.all(promises);
   //   core.info(`resolved ==> ${JSON.stringify(resolved, null, 2)}`);
 
-  const invalidResult = resolved.filter(
-    (response) => response.invalidUrls.length > 0
-  );
+  const invalidResult = resolved.filter(Boolean);
   core.info(`invalidResult ==> ${JSON.stringify(invalidResult, null, 2)}`);
 })();
