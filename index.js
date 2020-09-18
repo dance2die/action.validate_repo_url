@@ -48,20 +48,6 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
   const globber = await glob.create(patterns.join("\n"));
   const files = await globber.glob();
 
-  //   const result = files.reduce(async (promisedAcc, file) => {
-  //     const acc = await promisedAcc;
-  //     if (isDirectory(file)) return acc;
-
-  //     const urls = (await extractUrls(file)) || [];
-  //     if (urls.length <= 0) return acc;
-
-  //     const invalidUrls = (await validateUrls(urls)) || [];
-  //     if (invalidUrls.length <= 0) return acc;
-
-  //     acc[file] = invalidUrls;
-  //     return acc;
-  //   }, {});
-
   const promises = files.map(async (file) => {
     if (isDirectory(file)) return null;
 
