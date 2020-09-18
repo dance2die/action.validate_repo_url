@@ -41,10 +41,10 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
   const result = files.reduce(async (acc, file) => {
     if (isDirectory(file)) return acc;
 
-    const urls = (await extractUrls(file)) ?? [];
+    const urls = (await extractUrls(file)) || [];
     if (urls.length <= 0) return acc;
 
-    const invalidUrls = (await validateUrls(urls)) ?? [];
+    const invalidUrls = (await validateUrls(urls)) || [];
     if (invalidUrls.length <= 0) return acc;
 
     acc.push({ file, invalidUrls });
