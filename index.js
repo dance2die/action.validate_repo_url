@@ -37,7 +37,7 @@ const validateUrls = async (urls) => {
   );
 
   const validationResult = await Promise.all(promises);
-  console.log({ validationResult });
+  //   console.log({ validationResult });
   return validationResult.filter((result) => !result.exist);
 };
 
@@ -75,7 +75,11 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
     return { file, invalidUrls };
   });
 
-  const result = await Promise.all(promises);
+  const resolved = await Promise.all(promises);
+  //   core.info(`resolved ==> ${JSON.stringify(resolved, null, 2)}`);
 
-  core.info(`result ==> ${JSON.stringify(result, null, 2)}`);
+  const invalidResult = resolved.filter(
+    (response) => response.invalidUrls.length > 0
+  );
+  core.info(`invalidResult ==> ${JSON.stringify(invalidResult, null, 2)}`);
 })();
