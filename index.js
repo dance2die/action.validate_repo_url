@@ -18,7 +18,7 @@ const extractUrls = async (file) => {
   const text = await fs.readFileSync(file, "utf-8");
   const urls = getUrls(text);
 
-  core.info(`extractUrls==>`, { file, urls });
+  core.info(`extractUrls==>`, JSON.stringify({ file, urls }, null, 2));
   return urls;
 };
 
@@ -51,5 +51,5 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
     return acc;
   }, {});
 
-  core.info(`result ==>`, { result });
+  core.info(`result ==>`, JSON.stringify(result, null, 2));
 })();
