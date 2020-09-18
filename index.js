@@ -22,6 +22,15 @@ const extractUrls = async (file) => {
   return urls;
 };
 
+const validateUrls = async (urls) => {
+  const promises = urls.map(
+    async (url) => await urlExists(url).then((exist) => ({ exist, url }))
+  );
+
+  const validationResult = await Promise.all(promises);
+  return validationResult.filter((result) => !result.exist);
+};
+
 // const isFile = (path) => fs.lstatSync(path).isFile();
 const isDirectory = (path) => fs.lstatSync(path).isDirectory();
 
@@ -35,7 +44,7 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
     const urls = (await extractUrls(file)) ?? [];
     if (urls.length <= 0) return acc;
 
-    const invalidUrls = validateUrls(urls) ?? [];
+    const invalidUrls = (await validateUrls(urls)) ?? [];
     if (invalidUrls.length <= 0) return acc;
 
     acc.push({ file, invalidUrls });
