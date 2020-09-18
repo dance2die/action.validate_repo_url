@@ -18,9 +18,12 @@ const extractUrls = async (file) => {
   const text = await fs.readFileSync(file, "utf-8");
   const urls = getUrls(text);
 
-  core.info(`${file} => text`, JSON.stringify(text, null, 2));
+  core.info(`${file} => ${text}`, JSON.stringify(text, null, 2));
 
-  core.info(`extractUrls==>`, JSON.stringify({ file, urls }, null, 2));
+  core.info(
+    `extractUrls==> ${file}, ${text}`,
+    JSON.stringify({ file, urls }, null, 2)
+  );
   return urls;
 };
 
