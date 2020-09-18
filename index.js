@@ -1,7 +1,8 @@
+const fs = require("fs");
 const core = require("@actions/core");
 const glob = require("@actions/glob");
-const getUrls = require("get-urls");
-const fs = require("fs");
+// const getUrls = require("get-urls");
+const markdownLinkExtractor = require("markdown-link-extractor");
 
 const patterns = ["docs/**/*", "!node_modules", "!package*.json"];
 
@@ -16,7 +17,8 @@ async function urlExists(url) {
 
 const extractUrls = async (file) => {
   const text = await fs.readFileSync(file, "utf-8");
-  const urls = [...getUrls(text)];
+  //   const urls = [...getUrls(text)];
+  const urls = [...new Set(markdownLinkExtractor(text))];
 
   core.info(`extractUrls==> ${file}, ${JSON.stringify(urls, null, 2)}`);
   return urls;
