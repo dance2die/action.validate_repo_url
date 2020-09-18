@@ -7,9 +7,13 @@ const fetch = require("isomorphic-unfetch");
 
 const patterns = ["docs/**/*", "!node_modules", "!package*.json"];
 
+const UNAUTHORIZED = 401;
+const FORBIDDEN = 403;
+
 async function urlExists(url) {
   try {
     const response = await fetch(url, { method: "HEAD" });
+    if ([UNAUTHORIZED, FORBIDDEN].includes(response.status)) return true;
     return /4\d\d/.test(response.status) === false;
   } catch (error) {
     return false;
