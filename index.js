@@ -7,7 +7,7 @@ const patterns = ["docs/**/*", "!node_modules", "!package*.json"];
 
 const isFile = async (path) => {
   const stat = await fs.lstat(path);
-  return stat.isFile();
+  return await stat.isFile();
 };
 
 (async function () {
