@@ -42,7 +42,8 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
   const globber = await glob.create(patterns.join("\n"));
   const files = await globber.glob();
 
-  const result = files.reduce(async (acc, file) => {
+  const result = files.reduce(async (promisedAcc, file) => {
+    const acc = await promisedAcc;
     if (isDirectory(file)) return acc;
 
     const urls = (await extractUrls(file)) || [];
