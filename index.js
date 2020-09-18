@@ -7,7 +7,11 @@ const patterns = ["docs/**/*", "!node_modules", "!package*.json"];
 
 const isFile = async (path) => {
   const stat = await fs.lstat(path);
-  return await stat.isFile();
+  const isFile = await stat.isFile();
+
+  core.info(`File? ${isFile} => '${path}'`);
+
+  return isFile;
 };
 
 (async function () {
