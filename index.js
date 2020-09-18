@@ -49,7 +49,7 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
     const invalidUrls = (await validateUrls(urls)) || [];
     if (invalidUrls.length <= 0) return acc;
 
-    acc.push({ file, invalidUrls });
+    acc[file] = invalidUrls;
     return acc;
   }, {});
 
